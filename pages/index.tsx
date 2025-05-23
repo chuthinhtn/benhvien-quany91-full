@@ -37,9 +37,9 @@ export default function Home() {
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4">Liên hệ</h2>
-            <p>📞 1900 123 456</p>
-            <p>🏥 123 Đường Sức Khỏe, TP. AI</p>
-            <p>✉️ quany91@benhvien.vn</p>
+            <p>📞 0976 608 179</p>
+            <p>🏥 phường Ba Hàng, TP. Phổ Yên</p>
+            <p>✉️ benhvienqy91qk1@gmail.com</p>
           </CardContent>
         </Card>
       </main>
