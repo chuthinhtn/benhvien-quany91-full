@@ -13,15 +13,12 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // 🚀 Gửi dữ liệu lên console (tạm) – sau sẽ thay bằng Supabase
-    console.log("📝 Đặt lịch:", { name, phone, date, note });
-
-    // ✅ Tạm báo thành công (sau này sẽ là lưu DB)
+    console.log({ name, phone, date, note });
     setSuccess(true);
-
-    // Optional: reset form
-    setName(""); setPhone(""); setDate(""); setNote("");
+    setName("");
+    setPhone("");
+    setDate("");
+    setNote("");
   };
 
   return (
@@ -32,6 +29,7 @@ export default function Home() {
       </header>
 
       <main className="p-6 grid gap-6">
+        {/* Giới thiệu */}
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-2">Giới thiệu</h2>
@@ -41,20 +39,22 @@ export default function Home() {
           </CardContent>
         </Card>
 
+        {/* Đặt lịch khám */}
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4">Đặt lịch khám</h2>
             <form className="grid gap-4" onSubmit={handleSubmit}>
-              <Input placeholder="Họ tên bệnh nhân" value={name} onChange={e => setName(e.target.value)} />
-              <Input placeholder="Số điện thoại" type="tel" value={phone} onChange={e => setPhone(e.target.value)} />
-              <Input placeholder="Ngày khám (yyyy-mm-dd)" type="date" value={date} onChange={e => setDate(e.target.value)} />
-              <Textarea placeholder="Triệu chứng / Ghi chú" value={note} onChange={e => setNote(e.target.value)} />
+              <Input placeholder="Họ tên bệnh nhân" value={name} onChange={(e) => setName(e.target.value)} />
+              <Input placeholder="Số điện thoại" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+              <Input placeholder="Ngày khám" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <Textarea placeholder="Triệu chứng / Ghi chú" value={note} onChange={(e) => setNote(e.target.value)} />
               <Button type="submit" className="w-fit">Gửi yêu cầu</Button>
             </form>
             {success && <p className="text-green-600 mt-2">✅ Đặt lịch thành công!</p>}
           </CardContent>
         </Card>
 
+        {/* Liên hệ */}
         <Card>
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold mb-4">Liên hệ</h2>
@@ -64,9 +64,6 @@ export default function Home() {
           </CardContent>
         </Card>
       </main>
-    </div>
-  );
-}
 
       <footer className="bg-blue-900 text-white text-center p-4 mt-10">
         <p>© 2025 Bệnh viện Quân y 91. All rights reserved.</p>
@@ -74,3 +71,4 @@ export default function Home() {
     </div>
   );
 }
+
