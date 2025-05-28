@@ -1,23 +1,25 @@
 {
-  "name": "benhvien-quany91-full",
-  "version": "0.1.0",
+  "name": "benhvien-quany91",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.5.6",
+    "@supabase/supabase-js": "^2.49.8",
+    "next": "14.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
-    "@types/node": "22.15.19",
-    "@types/react": "19.1.4",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.1.6"
+    "@types/node": "22.15.21",
+    "@types/react": "19.1.5",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5.3.3"
   }
 }
