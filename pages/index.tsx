@@ -3,7 +3,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
+import { useLichKhamStore } from "@/lib/store";
+import { supabase } from "@/lib/supabase"; // thêm dòng này vào đầu file
 export default function Home() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -11,15 +12,27 @@ export default function Home() {
   const [note, setNote] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ name, phone, date, note });
+ const themLich = useLichKhamStore(state => state.themLich);
+
+
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const { error } = await supabase.from("lich_kham").insert({
+    ho_ten: name,
+    so_dien_thoai: phone,
+    ngay_kham: date,
+    trieu_chung: note,
+  });
+
+  if (!error) {
     setSuccess(true);
-    setName("");
-    setPhone("");
-    setDate("");
-    setNote("");
-  };
+    setName(""); setPhone(""); setDate(""); setNote("");
+  } else {
+    alert("❌ Lỗi đặt lịch: " + error.message);
+  }
+};
 
   return (
     <div className="min-h-screen bg-white text-gray-900">

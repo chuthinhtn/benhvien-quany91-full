@@ -1,6 +1,6 @@
 // pages/test.tsx
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase"; // giữ nguyên nếu đúng đường dẫn
 
 export default function TestPage() {
   const [name, setName] = useState("");
@@ -14,8 +14,8 @@ export default function TestPage() {
       {
         ho_ten: name,
         so_dien_thoai: phone,
-        ngay_kham: new Date().toISOString().split("T")[0],
-        trieu_chung: "Test từ Vercel",
+        ngay_kham: new Date().toISOString().split("T")[0], // hôm nay
+        trieu_chung: "Test from Vercel",
       },
     ]);
 
@@ -23,7 +23,8 @@ export default function TestPage() {
       console.error("❌ Lỗi:", error);
       setResult("❌ Lỗi: " + error.message);
     } else {
-      setResult("✅ Thành công! Kiểm tra Supabase");
+      console.log("✅ Thành công:", data);
+      setResult("✅ Thành công! Xem Supabase.");
     }
 
     setName("");

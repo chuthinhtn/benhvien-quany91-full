@@ -1,68 +1,64 @@
-// pages/admin.tsx
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useRouter } from "next/router";
+import { supabase } from "@/lib/supabase";
 
 type LichKham = {
   id: number;
-  hoTen: string;
-  soDienThoai: string;
-  ngayKham: string;
-  trieuChung: string;
+  ho_ten: string;
+  so_dien_thoai: string;
+  ngay_kham: string;
+  trieu_chung: string;
 };
 
 export default function AdminPage() {
-  const [lichKham, setLichKham] = useState<LichKham[]>([]);
+  const router = useRouter();
+  const [ds, setDs] = useState<LichKham[]>([]);
 
-  // ⚠️ Tạm thời dữ liệu giả lập — sau sẽ thay bằng Supabase fetch
   useEffect(() => {
-    const fakeData: LichKham[] = [
-      {
-        id: 1,
-        hoTen: "Nguyễn Văn A",
-        soDienThoai: "0912345678",
-        ngayKham: "2025-05-26",
-        trieuChung: "Sốt, đau đầu",
-      },
-      {
-        id: 2,
-        hoTen: "Trần Thị B",
-        soDienThoai: "0987654321",
-        ngayKham: "2025-05-27",
-        trieuChung: "Khó thở, ho",
-      },
-    ];
-    setLichKham(fakeData);
-  }, []);
+    const isAuth = localStorage.getItem("admin-auth");
+    if (isAuth !== "true") {
+      router.push("/login");
+    }
+
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("lich_kham")
+        .select("*")
+        .order("id", { ascending: false });
+
+      if (!error && data) setDs(data);
+    };
+
+    fetchData();
+  }, [router]);
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">🩺 Quản trị: Danh sách đặt lịch khám</h1>
-      <Card>
-        <CardContent className="overflow-x-auto p-4">
-          <table className="w-full border-collapse border text-sm">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="border px-2 py-1">#</th>
-                <th className="border px-2 py-1">Họ tên</th>
-                <th className="border px-2 py-1">SĐT</th>
-                <th className="border px-2 py-1">Ngày khám</th>
-                <th className="border px-2 py-1">Triệu chứng</th>
+      <h1 className="text-2xl font-bold mb-4">🩺 Danh sách đặt lịch khám</h1>
+      {ds.length === 0 ? (
+        <p className="text-gray-500">Chưa có lịch khám nào.</p>
+      ) : (
+        <table className="w-full border-collapse border text-sm">
+          <thead className="bg-gray-200">
+            <tr>
+              <th className="border px-2 py-1">Họ tên</th>
+              <th className="border px-2 py-1">SĐT</th>
+              <th className="border px-2 py-1">Ngày khám</th>
+              <th className="border px-2 py-1">Triệu chứng</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ds.map((item) => (
+              <tr key={item.id}>
+                <td className="border px-2 py-1">{item.ho_ten}</td>
+                <td className="border px-2 py-1">{item.so_dien_thoai}</td>
+                <td className="border px-2 py-1">{item.ngay_kham}</td>
+                <td className="border px-2 py-1">{item.trieu_chung}</td>
               </tr>
-            </thead>
-            <tbody>
-              {lichKham.map((lk) => (
-                <tr key={lk.id}>
-                  <td className="border px-2 py-1">{lk.id}</td>
-                  <td className="border px-2 py-1">{lk.hoTen}</td>
-                  <td className="border px-2 py-1">{lk.soDienThoai}</td>
-                  <td className="border px-2 py-1">{lk.ngayKham}</td>
-                  <td className="border px-2 py-1">{lk.trieuChung}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
