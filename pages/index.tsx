@@ -81,6 +81,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       <footer className="bg-blue-900 text-white text-center p-4 mt-10">
         <p>© 2025 Bệnh viện Quân y 91. All rights reserved.</p>
       </footer>
+	<Navbar />
     </div>
   );
 }
