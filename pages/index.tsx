@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLichKhamStore } from "@/lib/store";
 import { supabase } from "@/lib/supabase"; // thêm dòng này vào đầu file
+import Navbar from "@/components/Navbar";
 export default function Home() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
