@@ -25,23 +25,24 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <Navbar /> {/* ✅ CHÈN NGAY TRÊN CÙNG */}
-      <h1 className="text-3xl font-bold mt-6 mb-4">🏥 Bệnh Viện Quân y 91</h1>
-      <p className="mb-4">Sứ mệnh: Chăm sóc sức khỏe bằng cả trái tim ❤️</p>
+   <div className="max-w-screen-md mx-auto p-4 md:p-8">
+  <Navbar />
+  
+  <h1 className="text-3xl font-bold mb-4 mt-6 text-center">🏥 Bệnh viện Quân y 91</h1>
+  <p className="mb-6 text-center">Chăm sóc sức khỏe bằng cả trái tim ❤️</p>
 
-      <h2 className="text-xl font-bold mb-2">Giới thiệu</h2>
-      <p className="mb-4">Bệnh viện Quân y 91 là nơi hội tụ đội ngũ bác sĩ giỏi, tận tâm và công nghệ tiên tiến nhất.</p>
-
-      <h2 className="text-xl font-bold mb-2">Đặt lịch khám</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Họ tên bệnh nhân" className="border p-2" />
-        <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Số điện thoại" className="border p-2" />
-        <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Triệu chứng / Ghi chú" className="border p-2" />
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Gửi yêu cầu</button>
-      </form>
-
-      {result && <p className="mt-4">{result}</p>}
-    </div>
+  <h2 className="text-xl font-semibold mb-2">Đặt lịch khám</h2>
+  <form
+    onSubmit={handleSubmit}
+    className="grid grid-cols-1 md:grid-cols-3 gap-4"
+  >
+    <input className="border p-2 rounded" placeholder="Họ tên" />
+    <input className="border p-2 rounded" placeholder="SĐT" />
+    <input className="border p-2 rounded md:col-span-3" placeholder="Triệu chứng" />
+    <button className="bg-blue-600 text-white px-4 py-2 rounded md:col-span-3">
+      Gửi yêu cầu
+    </button>
+  </form>
+</div>
   );
 }
