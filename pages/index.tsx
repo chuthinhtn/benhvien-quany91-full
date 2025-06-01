@@ -1,6 +1,6 @@
+<Navbar />
 import { useState } from "react";
-import Navbar from "@/components/Navbar"; // ✅ Import Navbar mới
-
+import Navbar from "@/components/ui/Navbar";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
