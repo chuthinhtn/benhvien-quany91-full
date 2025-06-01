@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="max-w-3xl mx-auto p-4 space-y-6 text-gray-900">
+      <main className="min-h-screen bg-hospital-bg font-sans text-gray-800 px-4 py-8 md:px-8 max-w-3xl mx-auto space-y-6">
         <h1 className="text-3xl font-bold flex items-center">
           🏥 Bệnh viện Quân y 91
         </h1>
