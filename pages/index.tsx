@@ -1,17 +1,15 @@
-<Navbar />
-import { useState } from "react";
 import Navbar from "@/components/ui/Navbar";
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
-  const [result, setResult] = useState<string | null>(null);
+  const [result, setResult] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const { error } = await supabase.from("lich_kham").insert([
       {
         ho_ten: name,
@@ -20,73 +18,30 @@ export default function Home() {
         trieu_chung: note,
       },
     ]);
-
-    if (error) {
-      console.error("❌", error);
-      setResult("❌ " + error.message);
-    } else {
-      setResult("✅ Đặt lịch thành công!");
-    }
-
+    setResult(error ? "❌ Lỗi: " + error.message : "✅ Đặt lịch thành công!");
     setName("");
     setPhone("");
     setNote("");
   };
 
   return (
-    <>
-      <Navbar /> {/* ✅ Thêm thanh điều hướng mới */}
-      <main className="p-4 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-2">🏥 Bệnh Viện Quân y 91</h1>
-        <p className="mb-4 text-lg">
-          Sứ mệnh: Chăm sóc sức khỏe bằng cả trái tim ❤️
-        </p>
+    <div className="max-w-2xl mx-auto p-4">
+      <Navbar /> {/* ✅ CHÈN NGAY TRÊN CÙNG */}
+      <h1 className="text-3xl font-bold mt-6 mb-4">🏥 Bệnh Viện Quân y 91</h1>
+      <p className="mb-4">Sứ mệnh: Chăm sóc sức khỏe bằng cả trái tim ❤️</p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-2">Giới thiệu</h2>
-        <p className="mb-4">
-          Bệnh viện Quân y 91 là nơi hội tụ đội ngũ bác sĩ giỏi, tận tâm và công nghệ tiên tiến nhất.
-        </p>
+      <h2 className="text-xl font-bold mb-2">Giới thiệu</h2>
+      <p className="mb-4">Bệnh viện Quân y 91 là nơi hội tụ đội ngũ bác sĩ giỏi, tận tâm và công nghệ tiên tiến nhất.</p>
 
-        <h2 className="text-2xl font-semibold mt-6 mb-2">Đặt lịch khám</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 mb-4">
-          <input
-            placeholder="Họ tên bệnh nhân"
-            className="border px-2 py-1 rounded"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            placeholder="Số điện thoại"
-            className="border px-2 py-1 rounded"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <input
-            placeholder="Triệu chứng / Ghi chú"
-            className="border px-2 py-1 rounded"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Gửi yêu cầu
-          </button>
-        </form>
+      <h2 className="text-xl font-bold mb-2">Đặt lịch khám</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Họ tên bệnh nhân" className="border p-2" />
+        <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Số điện thoại" className="border p-2" />
+        <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Triệu chứng / Ghi chú" className="border p-2" />
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Gửi yêu cầu</button>
+      </form>
 
-        {result && <p className="font-semibold">{result}</p>}
-
-        <h2 className="text-2xl font-semibold mt-6 mb-2">Liên hệ</h2>
-        <p>📞 0976 608 179</p>
-        <p>🏥 phường Ba Hàng, TP. Phổ Yên</p>
-        <p>✉️ benhvienqy91qk1@gmail.com</p>
-
-        <footer className="mt-10 text-sm text-gray-500">
-          © 2025 Bệnh viện Quân y 91. All rights reserved.
-        </footer>
-      </main>
-    </>
+      {result && <p className="mt-4">{result}</p>}
+    </div>
   );
 }
-

@@ -1,53 +1,38 @@
 // components/ui/Navbar.tsx
-import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Bấm ra ngoài => đóng dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
-    <nav className="bg-white shadow-md px-4 py-3 flex justify-between items-center">
-      <div className="text-xl font-bold">🏥 Quân y 91</div>
+    <nav className="flex items-center justify-between bg-white border-b px-4 py-2 shadow-md">
+      {/* Logo bên trái */}
+      <div className="flex items-center space-x-2">
+        <Image src="/logo-91.png" alt="Logo" width={40} height={40} />
+        <span className="font-bold text-lg text-red-600">Quân y 91</span>
+      </div>
 
-      <div className="relative" ref={dropdownRef}>
+      {/* Menu bên phải */}
+      <div className="relative">
         <button
           onClick={() => setOpen(!open)}
-          className="text-blue-600 font-semibold flex items-center gap-1"
+          className="text-blue-600 font-semibold"
         >
           📋 Quản trị ▾
         </button>
-
         {open && (
-           <div className="absolute right-0 mt-2 w-56 bg-white text-black rounded shadow-lg z-10">
-    <Link href="/admin" className="block px-4 py-2 hover:bg-gray-100 border-b">
-      🛠 Trang admin
-    </Link>
-    <Link href="/lich-kham" className="block px-4 py-2 hover:bg-gray-100 border-b">
-      📋 Danh sách lịch khám
-    </Link>
-    <Link href="/thong-ke" className="block px-4 py-2 hover:bg-gray-100 border-b">
-      📊 Thống kê
-    </Link>
-    <Link href="/login" className="block px-4 py-2 hover:bg-gray-100">
-      🔐 Đăng nhập
-    </Link>
+          <div className="absolute right-0 mt-2 bg-white border rounded shadow-lg w-40 z-50">
+            <Link href="/admin">
+              <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Trang admin</p>
+            </Link>
+            <Link href="/lich-kham">
+              <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Danh sách lịch khám</p>
+            </Link>
+            <Link href="/login">
+              <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Đăng nhập</p>
+            </Link>
           </div>
         )}
       </div>
