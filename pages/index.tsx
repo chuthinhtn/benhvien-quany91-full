@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "@/components/ui/Navbar"; // ✅ Import Navbar mới
+import Navbar from "@/components/Navbar"; // ✅ Import Navbar mới
 
 import { supabase } from "@/lib/supabase";
 
