@@ -35,17 +35,19 @@ export default function Navbar() {
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow z-10">
-            <Link href="/admin">
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                Trang Admin
-              </div>
-            </Link>
-            <Link href="/login">
-              <div className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                Đăng nhập
-              </div>
-            </Link>
+           <div className="absolute right-0 mt-2 w-56 bg-white text-black rounded shadow-lg z-10">
+    <Link href="/admin" className="block px-4 py-2 hover:bg-gray-100 border-b">
+      🛠 Trang admin
+    </Link>
+    <Link href="/lich-kham" className="block px-4 py-2 hover:bg-gray-100 border-b">
+      📋 Danh sách lịch khám
+    </Link>
+    <Link href="/thong-ke" className="block px-4 py-2 hover:bg-gray-100 border-b">
+      📊 Thống kê
+    </Link>
+    <Link href="/login" className="block px-4 py-2 hover:bg-gray-100">
+      🔐 Đăng nhập
+    </Link>
           </div>
         )}
       </div>
