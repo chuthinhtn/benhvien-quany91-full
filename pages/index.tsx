@@ -25,6 +25,9 @@ export default function Home() {
   };
 
   return (
+  <div className="min-h-screen bg-blue-50 text-gray-800 font-sans px-4 py-6">
+    {/* Nội dung trang */}
+
     <>
       <Navbar />
       <main className="min-h-screen bg-hospital-bg font-sans text-gray-800 px-4 py-8 md:px-8 max-w-3xl mx-auto space-y-6">
